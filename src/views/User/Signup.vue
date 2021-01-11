@@ -1,13 +1,16 @@
 <template>
-  <div id="home">
+  <div id="signup">
     <Navbar></Navbar>
+    <v-main>
+      Signup Page
+    </v-main>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
 export default {
-  name: 'Home',
+  name: 'Signup',
   components: {
     Navbar
   }
