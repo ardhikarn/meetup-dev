@@ -6,7 +6,6 @@
           link
           v-for="(item, index) in menuItems"
           :key="index"
-          router
           :to="item.link"
         >
           <v-list-item-icon>
@@ -36,7 +35,6 @@
         outlined
         v-for="(item, index) in menuItems"
         :key="index"
-        router
         :to="item.link"
       >
         <v-icon left>{{ item.icon }}</v-icon>
