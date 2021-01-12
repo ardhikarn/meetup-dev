@@ -6,15 +6,15 @@
         <v-row dense>
           <v-col cols="12">
             <v-img
-              :src="card.src"
+              :src="meetup.imageUrl"
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="400px"
             >
-              <v-card-title>{{ card.title }}</v-card-title>
-              <v-card-subtitle class="secondary--text">{{
-                card.date
-              }}</v-card-subtitle>
+              <v-card-title>{{ meetup.title }}</v-card-title>
+              <v-card-subtitle class="secondary--text">
+                {{ meetup.date }}
+              </v-card-subtitle>
             </v-img>
 
             <v-card-text class="primary--text">
@@ -52,12 +52,13 @@ export default {
   components: {
     Navbar
   },
-  data: () => ({
-    card: {
-      title: 'Meetup in Tokyo',
-      date: '12nd January 2021',
-      src: 'https://static.toiimg.com/photo/47145223.cms'
+  data: () => ({}),
+  props: ['id'],
+  computed: {
+    // eslint-disable-next-line
+    meetup() {
+      return this.$store.getters.loadedMeetup(this.id)
     }
-  })
+  }
 }
 </script>

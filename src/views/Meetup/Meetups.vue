@@ -2,18 +2,24 @@
   <v-app id="meetups">
     <Navbar></Navbar>
     <v-container>
-      <v-card max-width="500" outlined class="mx-auto secondary">
+      <v-card
+        max-width="500"
+        outlined
+        class="mx-auto secondary my-4"
+        v-for="(meetup, index) in meetups"
+        :key="index"
+      >
         <v-container>
           <v-row dense>
             <v-col cols="5">
-              <v-img :src="items.src" height="130px"></v-img>
+              <v-img :src="meetup.imageUrl" height="130px"></v-img>
             </v-col>
             <v-col cols="7">
-              <v-card-title>{{ items.title }}</v-card-title>
+              <v-card-title>{{ meetup.title }}</v-card-title>
 
-              <v-card-subtitle>{{ items.date }}</v-card-subtitle>
+              <v-card-subtitle>{{ meetup.date }}</v-card-subtitle>
 
-              <v-btn outlined small class="mx-4" to="/meetup/1">
+              <v-btn outlined small class="mx-4" :to="`/meetup/${meetup.id}`">
                 <v-icon left>mdi-calendar-account</v-icon>
                 View Meetup
               </v-btn>
@@ -32,13 +38,13 @@ export default {
   components: {
     Navbar
   },
-  data: () => ({
-    items: {
-      title: 'My Meetup',
-      src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-      date: '12nd January 2021'
+  data: () => ({}),
+  computed: {
+    // eslint-disable-next-line
+    meetups() {
+      return this.$store.getters.featuredMeetups
     }
-  })
+  }
 }
 </script>
 

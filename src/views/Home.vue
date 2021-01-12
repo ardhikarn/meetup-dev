@@ -10,7 +10,7 @@
           <v-btn class="primary" to="/meetup/new">Organize Meetups</v-btn>
         </v-col>
       </v-row>
-      <v-carousel class="my-5">
+      <v-carousel class="mt-5" show-arrows-on-hover>
         <v-carousel-item
           v-for="(item, index) in meetups"
           :key="index"
@@ -25,43 +25,28 @@
           </v-row>
         </v-carousel-item>
       </v-carousel>
-      <v-row>
-        <v-col cols="12" class="text-center">
-          <p router to="/meetups">Join our Awesome Meetups !</p>
-        </v-col>
-      </v-row>
+      <div class="text-center">
+        <v-btn text to="/meetups">Join our Awesome Meetups !</v-btn>
+      </div>
     </v-container>
   </v-app>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+
 export default {
   name: 'Home',
   components: {
     Navbar
   },
-  data: () => ({
-    meetups: [
-      {
-        imageUrl:
-          'https://resources.matcha-jp.com/resize/720x2000/2019/12/20-93633.jpeg',
-        id: 'qwertyzxcvb101',
-        title: 'Meetup in Shibuya'
-      },
-      {
-        imageUrl: 'https://static.toiimg.com/photo/47145223.cms',
-        id: 'qwertyzxcvb102',
-        title: 'Meetup in Tokyo'
-      },
-      {
-        imageUrl:
-          'https://www.mensjournal.com/wp-content/uploads/2019/05/kyoto.jpg?w=900&h=506&crop=1&quality=86&strip=all&iswp=1',
-        id: 'qwertyzxcvb103',
-        title: 'Meetup in Kyoto'
-      }
-    ]
-  }),
+  computed: {
+    // eslint-disable-next-line
+    meetups() {
+      return this.$store.getters.featuredMeetups
+    }
+  },
+  data: () => ({}),
   methods: {
     // eslint-disable-next-line
     onLoadMeetup(id) {
