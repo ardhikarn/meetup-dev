@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-navigation-drawer v-model="sideNav" absolute temporary>
       <v-list>
         <v-list-item
@@ -43,7 +43,7 @@
         {{ item.title }}
       </v-btn>
     </v-app-bar>
-  </v-app>
+  </div>
 </template>
 
 <script>
