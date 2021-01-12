@@ -31,8 +31,8 @@
       </v-app-bar-title>
       <v-spacer></v-spacer>
       <v-btn
+        text
         class="d-none d-sm-flex mx-3"
-        outlined
         v-for="(item, index) in menuItems"
         :key="index"
         :to="item.link"

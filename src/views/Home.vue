@@ -4,10 +4,10 @@
     <v-container class="mt-2">
       <v-row>
         <v-col cols="12" sm="6" class="text-center">
-          <v-btn router to="/meetups">Explore Meetups</v-btn>
+          <v-btn class="primary" to="/meetups">Explore Meetups</v-btn>
         </v-col>
         <v-col cols="12" sm="6" class="text-center">
-          <v-btn router to="/meetup/new">Organize Meetups</v-btn>
+          <v-btn class="primary" to="/meetup/new">Organize Meetups</v-btn>
         </v-col>
       </v-row>
       <v-carousel class="my-5">
@@ -15,6 +15,8 @@
           v-for="(item, index) in meetups"
           :key="index"
           :src="item.imageUrl"
+          @click="onLoadMeetup(item.id)"
+          style="cursor: pointer"
         >
           <v-row class="fill-height" align="end" justify="center">
             <div class="title pa-2">
@@ -59,7 +61,13 @@ export default {
         title: 'Meetup in Kyoto'
       }
     ]
-  })
+  }),
+  methods: {
+    // eslint-disable-next-line
+    onLoadMeetup(id) {
+      this.$router.push(`meetup/${id}`)
+    }
+  }
 }
 </script>
 
