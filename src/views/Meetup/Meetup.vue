@@ -1,7 +1,7 @@
 <template>
   <v-app id="Meetup">
     <Navbar></Navbar>
-    <v-container class="mt-3">
+    <v-container class="mt-4">
       <v-card class="mx-auto" max-width="700">
         <v-row dense>
           <v-col cols="12">

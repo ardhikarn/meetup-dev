@@ -1,11 +1,11 @@
 <template>
   <v-app id="meetups">
     <Navbar></Navbar>
-    <v-container>
+    <v-container class="mt-4">
       <v-card
         max-width="500"
         outlined
-        class="mx-auto secondary my-4"
+        class="mx-auto secondary mb-4"
         v-for="(meetup, index) in meetups"
         :key="index"
       >

@@ -33,8 +33,25 @@ export default new Vuex.Store({
       registeredMeetups: ['qwertyzxcvb103']
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    setCreateMeetup(state, payload) {
+      state.loadedMeetups.push(payload)
+    }
+  },
+  actions: {
+    createMeetup({ commit }, payload) {
+      const meetup = {
+        id: 'sdfsdfsdcsca',
+        title: payload.title,
+        location: payload.location,
+        imageUrl: payload.imageUrl,
+        description: payload.description,
+        date: payload.date
+      }
+      // Reach out to firebase and store it
+      commit('setCreateMeetup', meetup)
+    }
+  },
   getters: {
     // eslint-disable-next-line
     loadedMeetups(state) {

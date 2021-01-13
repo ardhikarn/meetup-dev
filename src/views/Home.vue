@@ -1,7 +1,7 @@
 <template>
   <v-app id="home">
     <Navbar></Navbar>
-    <v-container class="mt-2">
+    <v-container class="mt-4">
       <v-row>
         <v-col cols="12" sm="6" class="text-center">
           <v-btn class="primary" to="/meetups">Explore Meetups</v-btn>
