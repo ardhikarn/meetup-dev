@@ -11,21 +11,30 @@ export default new Vuex.Store({
           'https://resources.matcha-jp.com/resize/720x2000/2019/12/20-93633.jpeg',
         id: 'qwertyzxcvb101',
         title: 'Meetup in Shibuya',
-        date: '13 January 2021'
+        location: 'Shibuya City',
+        date: '13 January 2021 20:30',
+        description:
+          'Shibuya is a special ward in Tokyo, Japan. A major commercial and finance center, it houses the two busiest railway stations in the world, Shinjuku Station and Shibuya Station. As of May 1, 2016, it has an estimated population of 221,801 and a population density of 14,679.09 people per km².'
       },
 
       {
         imageUrl: 'https://static.toiimg.com/photo/47145223.cms',
         id: 'qwertyzxcvb102',
         title: 'Meetup in Tokyo',
-        date: '15 January 2021'
+        location: 'Tokyo City',
+        date: '15 January 2021 22:30',
+        description:
+          'Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples. The opulent Meiji Shinto Shrine is known for its towering gate and surrounding woods. The Imperial Palace sits amid large public gardens.'
       },
       {
         imageUrl:
           'https://www.mensjournal.com/wp-content/uploads/2019/05/kyoto.jpg?w=900&h=506&crop=1&quality=86&strip=all&iswp=1',
         id: 'qwertyzxcvb103',
         title: 'Meetup in Kyoto',
-        date: '17 January 2021'
+        location: 'Kyoto City',
+        date: '17 January 2021 18:30',
+        description:
+          "Kyoto, once the capital of Japan, is a city on the island of Honshu. It's famous for its numerous classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines and traditional wooden houses."
       }
     ],
     user: {

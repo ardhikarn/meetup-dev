@@ -13,18 +13,15 @@
             >
               <v-card-title>{{ meetup.title }}</v-card-title>
               <v-card-subtitle class="secondary--text">
-                {{ meetup.date }}
+                {{ meetup.date | date }}
               </v-card-subtitle>
             </v-img>
 
             <v-card-text class="primary--text">
-              <div>Whitehaven Beach</div>
+              <div>{{ meetup.location }}</div>
 
               <div>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi quis laudantium debitis nihil adipisci, maiores
-                aliquam obcaecati sequi dolorem expedita inventore nam fugit
-                reiciendis fuga perspiciatis tempora eligendi. Et, ex!
+                {{ meetup.description }}
               </div>
             </v-card-text>
 

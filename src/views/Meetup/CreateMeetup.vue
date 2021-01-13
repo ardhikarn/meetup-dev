@@ -30,6 +30,16 @@
                   required
                 ></v-text-field>
                 <v-img :src="imageUrl"></v-img>
+                <p style="fontSize: 16px" class="mt-5">Date and Time</p>
+                <v-date-picker v-model="date" elevation="10"></v-date-picker>
+
+                <v-time-picker
+                  class="mt-4"
+                  v-model="time"
+                  format="24hr"
+                  elevation="10"
+                ></v-time-picker>
+
                 <v-textarea
                   name="description"
                   v-model="description"
@@ -72,7 +82,9 @@ export default {
     title: '',
     location: '',
     imageUrl: '',
-    description: ''
+    description: '',
+    date: new Date().toISOString().substr(0, 10),
+    time: new Date()
   }),
   computed: {
     isFormValid() {
@@ -82,6 +94,19 @@ export default {
         this.imageUrl !== '' &&
         this.description !== ''
       )
+    },
+    submittableDateTime() {
+      const date = new Date(this.date)
+      if (typeof this.time === 'string') {
+        const hours = this.time.match(/^(\d+)/)[1]
+        const minutes = this.time.match(/:(\d+)/)[1]
+        date.setHours(hours)
+        date.setMinutes(minutes)
+      } else {
+        date.setHours(this.time.getHours())
+        date.setMinutes(this.time.getMinutes())
+      }
+      return date
     }
   },
   methods: {
@@ -92,7 +117,7 @@ export default {
         location: this.location,
         imageUrl: this.imageUrl,
         description: this.description,
-        date: new Date()
+        date: this.submittableDateTime
       }
       this.$store.dispatch('createMeetup', dataMeetup) // parameter creatMeetup is (store.action)
       this.$router.push('/meetups')

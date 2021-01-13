@@ -17,7 +17,7 @@
             <v-col cols="7">
               <v-card-title>{{ meetup.title }}</v-card-title>
 
-              <v-card-subtitle>{{ meetup.date }}</v-card-subtitle>
+              <v-card-subtitle>{{ meetup.date | date }}</v-card-subtitle>
 
               <v-btn outlined small class="mx-4" :to="`/meetup/${meetup.id}`">
                 <v-icon left>mdi-calendar-account</v-icon>
