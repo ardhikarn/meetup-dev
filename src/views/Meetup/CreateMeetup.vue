@@ -4,7 +4,7 @@
     <v-container class="mt-4">
       <v-row justify="center">
         <v-col cols="12" sm="10" md="8" lg="6">
-          <form action="" @submit.prevent="onSubmit">
+          <form @submit.prevent="onSubmit">
             <v-card ref="form">
               <v-card-text>
                 <h1 class="secondary--text mb-5">Create a new Meetup</h1>
