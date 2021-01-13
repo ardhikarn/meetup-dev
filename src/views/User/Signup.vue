@@ -5,9 +5,11 @@
       <v-row justify="center">
         <v-col cols="12" sm="10" md="8" lg="6">
           <form @submit.prevent="onSignup">
-            <v-card ref="form">
-              <v-card-text>
-                <h1 class="primary--text mb-5">Sign up</h1>
+            <v-card tile max-width="350" class="mx-auto">
+              <v-card-title class="primary--text secondary"
+                >Sign up</v-card-title
+              >
+              <v-card-text class="pt-5">
                 <v-text-field
                   name="email"
                   v-model="email"
@@ -40,12 +42,9 @@
                 ></v-text-field>
               </v-card-text>
               <v-divider class="mt-12"></v-divider>
-              <v-card-actions>
+              <v-card-actions class="secondary">
                 <v-btn color="primary" text type="submit">
                   Sign up
-                </v-btn>
-                <v-btn text>
-                  Cancel
                 </v-btn>
               </v-card-actions>
             </v-card>
