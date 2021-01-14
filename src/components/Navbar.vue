@@ -51,24 +51,39 @@ export default {
   components: {},
 
   data: () => ({
-    sideNav: false,
-    menuItems: [
-      {
-        icon: 'mdi-account-group-outline',
-        title: 'View Meetups',
-        link: '/meetups'
-      },
-      {
-        icon: 'mdi-map-marker-radius-outline',
-        title: 'Organize Meetup',
-        link: '/meetup/new'
-      },
-      { icon: 'mdi-account-outline', title: 'Profile', link: '/profile' },
-      { icon: 'mdi-account-plus-outline', title: 'Sign Up', link: '/signup' },
-      { icon: 'mdi-login-variant', title: 'Sign In', link: '/signin' }
-      // { icon: 'mdi-logout-variant', title: 'Sign Out' }
-    ]
-  })
+    sideNav: false
+    // { icon: 'mdi-logout-variant', title: 'Sign Out' }
+  }),
+  computed: {
+    menuItems() {
+      let menuItems = [
+        { icon: 'mdi-account-plus-outline', title: 'Sign Up', link: '/signup' },
+        { icon: 'mdi-login-variant', title: 'Sign In', link: '/signin' }
+      ]
+      if (this.userIsAuthenticated) {
+        menuItems = [
+          {
+            icon: 'mdi-account-group-outline',
+            title: 'View Meetups',
+            link: '/meetups'
+          },
+          {
+            icon: 'mdi-map-marker-radius-outline',
+            title: 'Organize Meetup',
+            link: '/meetup/new'
+          },
+          { icon: 'mdi-account-outline', title: 'Profile', link: '/profile' }
+        ]
+      }
+      return menuItems
+    },
+    userIsAuthenticated() {
+      return (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      )
+    }
+  }
 }
 </script>
 
