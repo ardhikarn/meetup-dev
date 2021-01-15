@@ -22,13 +22,15 @@
                   label="Location"
                   required
                 ></v-text-field>
-                <v-text-field
-                  name="imageUrl"
-                  v-model="imageUrl"
-                  :rules="[() => !!imageUrl || 'This field is required']"
-                  label="Image URL"
-                  required
-                ></v-text-field>
+                <v-btn class="primary" @click="uploadImage">Upload Image</v-btn>
+                <input
+                  type="file"
+                  accept="image/*"
+                  style="display: none"
+                  ref="fileInput"
+                  @change="onFilePicked"
+                />
+
                 <v-img :src="imageUrl"></v-img>
                 <v-textarea
                   name="description"
@@ -90,7 +92,8 @@ export default {
     imageUrl: '',
     description: '',
     date: new Date().toISOString().substr(0, 10),
-    time: new Date()
+    time: new Date(),
+    image: null
   }),
   computed: {
     isFormValid() {
@@ -117,16 +120,34 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (!this.isFormValid) return alert('form not Valid')
+      if (!this.isFormValid) return
+      if (!this.image) return
       const dataMeetup = {
         title: this.title,
         location: this.location,
-        imageUrl: this.imageUrl,
+        image: this.image,
         description: this.description,
         date: this.submittableDateTime
       }
       this.$store.dispatch('createMeetup', dataMeetup) // parameter creatMeetup is (store.action)
       this.$router.push('/meetups')
+    },
+    uploadImage() {
+      this.$refs.fileInput.click()
+    },
+    onFilePicked(event) {
+      console.log(event.target)
+      const files = event.target.files
+      const filename = files[0].name
+      if (filename.lastIndexOf('.') <= 0) {
+        return alert('please add a valid file!')
+      }
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.imageUrl = fileReader.result
+      })
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
     }
   }
 }
