@@ -20,7 +20,7 @@
         <v-col cols="12">
           <v-carousel class="mt-5" show-arrows-on-hover cycle>
             <v-carousel-item
-              v-for="(item, index) in meetups2"
+              v-for="(item, index) in meetups"
               :key="index"
               :src="item.imageUrl"
               @click="onLoadMeetup(item.id)"
@@ -57,9 +57,6 @@ export default {
     },
     isLoading() {
       return this.$store.getters.isLoading
-    },
-    meetups2() {
-      return this.$store.getters.getMeetups
     }
   },
   data: () => ({}),

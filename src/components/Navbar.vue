@@ -16,6 +16,14 @@
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item v-if="userIsAuthenticated" @click="logout">
+          <v-list-item-icon>
+            <v-icon left>mdi-logout-variant</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar dark app dense class="primary">
@@ -39,6 +47,15 @@
       >
         <v-icon left>{{ item.icon }}</v-icon>
         {{ item.title }}
+      </v-btn>
+      <v-btn
+        text
+        class="d-none d-sm-flex mx-3"
+        @click="logout"
+        v-if="userIsAuthenticated"
+      >
+        <v-icon left>mdi-logout-variant</v-icon>
+        Logout
       </v-btn>
     </v-app-bar>
   </div>
@@ -82,6 +99,11 @@ export default {
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       )
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
     }
   }
 }

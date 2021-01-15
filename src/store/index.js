@@ -6,38 +6,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loadedMeetups: [
-      {
-        imageUrl:
-          'https://resources.matcha-jp.com/resize/720x2000/2019/12/20-93633.jpeg',
-        id: 'qwertyzxcvb101',
-        title: 'Meetup in Shibuya',
-        location: 'Shibuya City',
-        date: '13 January 2021 20:30',
-        description:
-          'Shibuya is a special ward in Tokyo, Japan. A major commercial and finance center, it houses the two busiest railway stations in the world, Shinjuku Station and Shibuya Station. As of May 1, 2016, it has an estimated population of 221,801 and a population density of 14,679.09 people per km².'
-      },
-
-      {
-        imageUrl: 'https://static.toiimg.com/photo/47145223.cms',
-        id: 'qwertyzxcvb102',
-        title: 'Meetup in Tokyo',
-        location: 'Tokyo City',
-        date: '15 January 2021 22:30',
-        description:
-          'Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples. The opulent Meiji Shinto Shrine is known for its towering gate and surrounding woods. The Imperial Palace sits amid large public gardens.'
-      },
-      {
-        imageUrl:
-          'https://www.mensjournal.com/wp-content/uploads/2019/05/kyoto.jpg?w=900&h=506&crop=1&quality=86&strip=all&iswp=1',
-        id: 'qwertyzxcvb103',
-        title: 'Meetup in Kyoto',
-        location: 'Kyoto City',
-        date: '17 January 2021 18:30',
-        description:
-          "Kyoto, once the capital of Japan, is a city on the island of Honshu. It's famous for its numerous classical Buddhist temples, as well as gardens, imperial palaces, Shinto shrines and traditional wooden houses."
-      }
-    ],
     meetups: [],
     user: null,
     isLoading: false,
@@ -64,13 +32,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    createMeetup({ commit }, payload) {
+    createMeetup({ commit, getters }, payload) {
       const meetup = {
         title: payload.title,
         location: payload.location,
         imageUrl: payload.imageUrl,
         description: payload.description,
-        date: payload.date.toISOString()
+        date: payload.date.toISOString(),
+        creatorId: getters.user.id
       }
       firebase
         .database()
@@ -103,7 +72,8 @@ export default new Vuex.Store({
               location: obj[key].location,
               imageUrl: obj[key].imageUrl,
               date: obj[key].date,
-              description: obj[key].description
+              description: obj[key].description,
+              creatorId: obj[key].creatorId
             })
           }
           commit('setMeetups', meetups)
@@ -154,6 +124,16 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
+    autoSignin({ commit }, payload) {
+      commit('setUser', {
+        id: payload.uid,
+        registeredMeetups: []
+      })
+    },
+    logout({ commit }) {
+      firebase.auth().signOut()
+      commit('setUser', null)
+    },
     clearError({ commit }) {
       commit('clearError')
     }
@@ -185,9 +165,6 @@ export default new Vuex.Store({
     },
     error(state) {
       return state.error
-    },
-    getMeetups(state) {
-      return state.meetups
     }
   },
   modules: {}
