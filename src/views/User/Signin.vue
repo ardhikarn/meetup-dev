@@ -12,7 +12,7 @@
           <form @submit.prevent="onSignin">
             <v-card tile max-width="350" class="mx-auto">
               <v-card-title class="primary--text secondary"
-                >Sign up</v-card-title
+                >Sign in</v-card-title
               >
               <v-card-text class="pt-5">
                 <v-text-field

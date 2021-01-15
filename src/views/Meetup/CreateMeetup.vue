@@ -30,16 +30,6 @@
                   required
                 ></v-text-field>
                 <v-img :src="imageUrl"></v-img>
-                <p style="fontSize: 16px" class="mt-5">Date and Time</p>
-                <v-date-picker v-model="date" elevation="10"></v-date-picker>
-
-                <v-time-picker
-                  class="mt-4"
-                  v-model="time"
-                  format="24hr"
-                  elevation="10"
-                ></v-time-picker>
-
                 <v-textarea
                   name="description"
                   v-model="description"
@@ -47,6 +37,22 @@
                   label="Description"
                   required
                 ></v-textarea>
+                <p style="fontSize: 16px" class="mt-5">Date and Time</p>
+                <v-row>
+                  <v-col cols="12"
+                    ><v-date-picker
+                      v-model="date"
+                      elevation="10"
+                    ></v-date-picker
+                  ></v-col>
+                  <v-col
+                    ><v-time-picker
+                      v-model="time"
+                      format="24hr"
+                      elevation="10"
+                    ></v-time-picker
+                  ></v-col>
+                </v-row>
               </v-card-text>
               <v-divider class="mt-12"></v-divider>
               <v-card-actions>
