@@ -34,7 +34,10 @@
             </v-card-text>
 
             <v-card-actions>
-              <v-btn color="primary" text>Join</v-btn>
+              <JoinDialog
+                v-if="userIsAuthenticated && !userIsCreator"
+                :meetupId="meetup.id"
+              ></JoinDialog>
               <v-spacer></v-spacer>
               <EditDialog v-if="userIsCreator" :meetup="meetup"></EditDialog>
             </v-card-actions>
@@ -49,13 +52,15 @@
 import Navbar from '@/components/Navbar.vue'
 import EditDialog from '@/components/EditDialog.vue'
 import EditDate from '@/components/EditDate.vue'
+import JoinDialog from '@/components/JoinDialog.vue'
 
 export default {
   name: 'Meetup',
   components: {
     Navbar,
     EditDialog,
-    EditDate
+    EditDate,
+    JoinDialog
   },
   props: ['id'],
   data: () => ({}),
