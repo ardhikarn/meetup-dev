@@ -27,6 +27,24 @@ export default new Vuex.Store({
       if (payload.description) meetup.description = payload.description
       if (payload.date) meetup.date = payload.date
     },
+    setUserJoinMeetup(state, payload) {
+      const id = payload.id
+      if (
+        state.user.registeredMeetups.findIndex(meetup => meetup.id === id) >= 0
+      ) {
+        return
+      }
+      state.user.registeredMeetups.push(id)
+      state.user.fbKeys[id] = payload.firebaseKey
+    },
+    setUserUnjoinMeetup(state, payload) {
+      const joinedMeetup = state.user.registeredMeetups
+      joinedMeetup.splice(
+        joinedMeetup.findIndex(meetup => meetup.id === payload),
+        1
+      )
+      Reflect.deleteProperty(state.user.fbKeys, payload)
+    },
     setUser(state, payload) {
       state.user = payload
     },
@@ -136,6 +154,45 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
+    userJoinMeetup({ commit, getters }, payload) {
+      commit('setIsLoading', true)
+      const user = getters.user
+      firebase
+        .database()
+        .ref('/users/' + user.id)
+        .child('/joins/')
+        .push(payload)
+        .then(data => {
+          commit('setIsLoading', false)
+          commit('setUserJoinMeetup', {
+            id: payload,
+            firebaseKey: data.key
+          })
+        })
+        .catch(error => {
+          commit('setIsLoading', false)
+          console.log(error)
+        })
+    },
+    userUnjoinMeetup({ commit, getters }, payload) {
+      commit('setIsLoading', true)
+      const user = getters.user
+      if (!user.fbKeys) return
+      const firebaseKey = user.fbKeys[payload]
+      firebase
+        .database()
+        .ref('/users/' + user.id + '/joins/')
+        .child(firebaseKey)
+        .remove()
+        .then(() => {
+          commit('setIsLoading', false)
+          commit('setUserUnjoinMeetup', payload)
+        })
+        .catch(error => {
+          commit('setIsLoading', false)
+          console.log(error)
+        })
+    },
     userSignup({ commit }, payload) {
       commit('setIsLoading', true)
       commit('clearError')
@@ -166,7 +223,8 @@ export default new Vuex.Store({
           commit('setIsLoading', false)
           const newUser = {
             id: user.user.uid,
-            registeredMeetups: []
+            registeredMeetups: [],
+            fbKeys: {}
           }
           commit('setUser', newUser)
         })
@@ -179,7 +237,8 @@ export default new Vuex.Store({
     autoSignin({ commit }, payload) {
       commit('setUser', {
         id: payload.uid,
-        registeredMeetups: []
+        registeredMeetups: [],
+        fbKeys: {}
       })
     },
     logout({ commit }) {
