@@ -18,6 +18,15 @@ export default new Vuex.Store({
     setCreateMeetup(state, payload) {
       state.meetups.push(payload)
     },
+    setUpdateMeetup(state, payload) {
+      const meetup = state.meetups.find(meetup => {
+        return meetup.id === payload.id
+      })
+      if (payload.title) meetup.title = payload.title
+      if (payload.location) meetup.location = payload.location
+      if (payload.description) meetup.description = payload.description
+      if (payload.date) meetup.date = payload.date
+    },
     setUser(state, payload) {
       state.user = payload
     },
@@ -103,6 +112,28 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error)
           commit('setIsLoading', true)
+        })
+    },
+    updateMeetup({ commit }, payload) {
+      commit('setIsLoading', true)
+      const updateObj = {}
+      if (payload.title) updateObj.title = payload.title
+      if (payload.location) updateObj.location = payload.location
+      if (payload.description) updateObj.description = payload.description
+      if (payload.date) updateObj.date = payload.date
+
+      firebase
+        .database()
+        .ref('meetups')
+        .child(payload.id)
+        .update(updateObj)
+        .then(() => {
+          commit('setIsLoading', false)
+          commit('setUpdateMeetup', payload)
+        })
+        .catch(error => {
+          commit('setIsLoading', false)
+          console.log(error)
         })
     },
     userSignup({ commit }, payload) {
