@@ -9,6 +9,7 @@
               <v-card-text>
                 <h1 class="secondary--text mb-5">Create a new Meetup</h1>
                 <v-text-field
+                  id="title"
                   name="title"
                   v-model="title"
                   :rules="[() => !!title || 'This field is required']"
@@ -16,6 +17,7 @@
                   required
                 ></v-text-field>
                 <v-text-field
+                  id="location"
                   name="location"
                   v-model="location"
                   :rules="[() => !!location || 'This field is required']"
@@ -33,6 +35,7 @@
 
                 <v-img :src="imageUrl"></v-img>
                 <v-textarea
+                  id="description"
                   name="description"
                   v-model="description"
                   :rules="[() => !!description || 'This field is required']"
