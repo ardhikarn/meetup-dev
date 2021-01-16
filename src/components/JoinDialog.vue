@@ -25,8 +25,8 @@
           <v-btn color="red darken-1" text @click="joinDialog = false">
             Cancel
           </v-btn>
-          <v-btn color="green darken-1" text @click="onJoin">
-            Join
+          <v-btn color="green darken-1" text @click="onAgree">
+            Agree
           </v-btn>
         </v-card-actions>
       </v-container>
@@ -53,7 +53,7 @@ export default {
     }
   },
   methods: {
-    onJoin() {
+    onAgree() {
       if (this.isRegistered) {
         this.$store.dispatch('userUnjoinMeetup', this.meetupId)
       } else {

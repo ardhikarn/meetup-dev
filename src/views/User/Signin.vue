@@ -102,7 +102,6 @@ export default {
       })
     },
     onDismissed() {
-      console.log('Dismissed Alert')
       this.$store.dispatch('clearError')
     }
   }

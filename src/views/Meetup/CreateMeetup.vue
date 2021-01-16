@@ -24,7 +24,9 @@
                   label="Location"
                   required
                 ></v-text-field>
-                <v-btn class="primary" @click="uploadImage">Upload Image</v-btn>
+                <v-btn class="primary my-5" @click="uploadImage"
+                  >Upload Image</v-btn
+                >
                 <input
                   type="file"
                   accept="image/*"
@@ -33,7 +35,7 @@
                   @change="onFilePicked"
                 />
 
-                <v-img :src="imageUrl"></v-img>
+                <v-img class="mb-5" :src="imageUrl"></v-img>
                 <v-textarea
                   id="description"
                   name="description"
@@ -70,7 +72,7 @@
                   Submit
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn text>
+                <v-btn text to="/">
                   Cancel
                 </v-btn>
               </v-card-actions>
@@ -139,7 +141,6 @@ export default {
       this.$refs.fileInput.click()
     },
     onFilePicked(event) {
-      console.log(event.target)
       const files = event.target.files
       const filename = files[0].name
       if (filename.lastIndexOf('.') <= 0) {

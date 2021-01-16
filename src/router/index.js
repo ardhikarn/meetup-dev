@@ -31,7 +31,8 @@ const routes = [
     path: '/meetup/:id',
     name: 'Meetup',
     props: true,
-    component: Meetup
+    component: Meetup,
+    beforeEnter: AuthGuard
   },
   {
     path: '/signin',
